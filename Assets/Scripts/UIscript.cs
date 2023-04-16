@@ -15,6 +15,10 @@ public class UIscript : MonoBehaviour
         string sceneName = splitParameters[0];
         int passedTime = int.Parse(splitParameters[1]);
 
+        if (passedTime == 1)
+        {
+            Pet.Instance.motivate();
+        }
 
         calendarManager.Instance.progressTime(passedTime);
         SceneManager.LoadScene(sceneName);

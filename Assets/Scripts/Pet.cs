@@ -32,6 +32,12 @@ public class Pet : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public void motivate()
+    {
+        motivated = true;
+
+    }
+
     public void dexUp()
     {
         int motivationBonus;
@@ -44,7 +50,7 @@ public class Pet : MonoBehaviour
             motivationBonus = 1;
         }
 
-        DEX += 1 * motivationBonus;
+        DEX += (1 * motivationBonus);
 
         motivated = false;
     }

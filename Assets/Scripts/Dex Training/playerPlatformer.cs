@@ -9,6 +9,7 @@ public class playerPlatformer : MonoBehaviour
     private float horizontalInput;
     private Rigidbody rigidBodyComponent;
     private bool isGrounded;
+    private bool reachedEnd;
     public Transform SpawnPoint;
     Quaternion spawnQuaternion;
 
@@ -20,8 +21,14 @@ public class playerPlatformer : MonoBehaviour
 
     void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-
+        if (!reachedEnd)
+        {
+            horizontalInput = Input.GetAxis("Horizontal");
+        }
+        else
+        {
+            horizontalInput = Input.GetAxis("Horizontal") * 0;
+        }
         isGrounded = groundCheck.isObjectGrounded;
 
         if (Input.GetKeyDown(KeyCode.W) && isGrounded)
@@ -51,8 +58,10 @@ public class playerPlatformer : MonoBehaviour
 
         if (other.gameObject.layer == 8)
         {
+            reachedEnd = true;
             Pet.Instance.dexUp();
             winUi.SetActive(true);
         }
     }
+
 }
