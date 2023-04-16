@@ -10,9 +10,12 @@ public class Pet : MonoBehaviour
         get; set;
     }
 
+    public new Renderer renderer = new Renderer();
     public string petType;
     public string BPMutation;
-    public int petElement;
+    public int petElement = 0;
+    int elementalBonus;
+    public Material[] material;
 
     [SerializeField] protected int HP, STR, DEX, INT;
 
@@ -23,6 +26,7 @@ public class Pet : MonoBehaviour
 
     //values to update while storing them between scenes
     public bool motivated;
+    private int motivatedBonus;
 
 
     void Awake()
@@ -30,6 +34,10 @@ public class Pet : MonoBehaviour
         if (Instance != null) { Destroy(this); return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        renderer = GetComponent<Renderer>();
+        renderer.enabled = true;
+        renderer.sharedMaterial = material[petElement];
     }
 
     public void motivate()
@@ -37,21 +45,46 @@ public class Pet : MonoBehaviour
         motivated = true;
 
     }
-
-    public void dexUp()
+    private void petMotivatedBonus()
     {
-        int motivationBonus;
         if (motivated)
         {
-            motivationBonus = 2;
+            motivatedBonus = 2;
+        }
+        else if (!motivated)
+        {
+            motivatedBonus = 1;
+        }
+    }
+
+    public void mutateElemental()
+    {
+        petElement = Random.Range(1, 5);
+        renderer.sharedMaterial = material[petElement];
+    }
+
+    private void petElementBonus(int x, int y)
+    {
+        if (petElement == x)
+        {
+            elementalBonus = -1;
+
+        }
+        else if (petElement == y)
+        {
+            elementalBonus = 1;
         }
         else
         {
-            motivationBonus = 1;
+            elementalBonus = 0;
         }
+    }
 
-        DEX += (1 * motivationBonus);
-
+    public void dexUp()
+    {
+        petMotivatedBonus();
+        petElementBonus(3, 4);
+        DEX += ((1 * motivatedBonus) + elementalBonus);
         motivated = false;
     }
 

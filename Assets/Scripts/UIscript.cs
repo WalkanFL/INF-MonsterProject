@@ -26,4 +26,9 @@ public class UIscript : MonoBehaviour
 
     }
 
+    public void MutationActivation()
+    {
+        Pet.Instance.mutateElemental();
+    }
+
 }

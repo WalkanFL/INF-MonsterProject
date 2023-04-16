@@ -6,6 +6,8 @@ public class playerPlatformer : MonoBehaviour
 {
     [SerializeField] private GroundedCheck groundCheck;
     [SerializeField] private GameObject winUi;
+    [SerializeField] private GameObject mutationButton;
+
     private float horizontalInput;
     private Rigidbody rigidBodyComponent;
     private bool isGrounded;
@@ -45,7 +47,7 @@ public class playerPlatformer : MonoBehaviour
 
     void FixedUpdate()
     {
-        rigidBodyComponent.velocity = new Vector3(horizontalInput * Pet.Instance.dex, rigidBodyComponent.velocity.y, 0);
+        rigidBodyComponent.velocity = new Vector3(horizontalInput * (Pet.Instance.dex / 2 + 2), rigidBodyComponent.velocity.y, 0);
 
     }
 
@@ -59,6 +61,15 @@ public class playerPlatformer : MonoBehaviour
         if (other.gameObject.layer == 8)
         {
             reachedEnd = true;
+            int randomNumber = Random.Range(1, 100);
+            if (Pet.Instance.motivated)
+            {
+                randomNumber -= 10;
+            }
+            if (randomNumber <= 20)
+            {
+                mutationButton.SetActive(true);
+            }
             Pet.Instance.dexUp();
             winUi.SetActive(true);
         }
