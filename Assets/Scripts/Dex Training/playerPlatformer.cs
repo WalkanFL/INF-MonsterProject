@@ -7,6 +7,10 @@ public class playerPlatformer : MonoBehaviour
     [SerializeField] private GroundedCheck groundCheck;
     [SerializeField] private GameObject winUi;
     [SerializeField] private GameObject mutationButton;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip jump;
+    [SerializeField] private AudioClip stomp;
+    [SerializeField] private AudioClip death;
 
     private float horizontalInput;
     private Rigidbody rigidBodyComponent;
@@ -36,10 +40,13 @@ public class playerPlatformer : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W) && isGrounded)
         {
             rigidBodyComponent.AddForce((Vector3.up * 6) * (Pet.Instance.str / 2), ForceMode.VelocityChange);
+            audioSource.PlayOneShot(jump);
+
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
             rigidBodyComponent.AddForce((Vector3.down * 5) * (Pet.Instance.str), ForceMode.VelocityChange);
+            audioSource.PlayOneShot(stomp);
         }
 
 
@@ -56,6 +63,7 @@ public class playerPlatformer : MonoBehaviour
         if (other.gameObject.layer == 6)
         {
             gameObject.transform.SetPositionAndRotation(SpawnPoint.position, spawnQuaternion);
+            audioSource.PlayOneShot(death, 0.1f);
         }
 
         if (other.gameObject.layer == 8)

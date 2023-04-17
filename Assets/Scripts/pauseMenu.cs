@@ -5,6 +5,7 @@ using UnityEngine;
 public class pauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuObject;
+    public AudioSource audioSource;
 
     void Update()
     {
@@ -17,6 +18,7 @@ public class pauseMenu : MonoBehaviour
     private void pause()
     {
         Time.timeScale = 0f;
+        audioSource.pitch = 0.9f;
         pauseMenuObject.SetActive(true);
 
     }
@@ -24,6 +26,7 @@ public class pauseMenu : MonoBehaviour
     public void resume()
     {
         Time.timeScale = 1f;
+        audioSource.pitch = 1;
         pauseMenuObject.SetActive(false);
     }
 
