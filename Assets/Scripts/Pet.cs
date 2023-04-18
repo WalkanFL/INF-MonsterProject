@@ -16,6 +16,8 @@ public class Pet : MonoBehaviour
     public int petElement = 0;
     int elementalBonus;
     public Material[] material;
+    [HideInInspector] public int statGain;
+
 
     [SerializeField] protected int HP, STR, DEX, INT;
 
@@ -26,7 +28,6 @@ public class Pet : MonoBehaviour
 
     //values to update while storing them between scenes
     public bool motivated;
-    private int motivatedBonus;
 
 
     void Awake()
@@ -45,15 +46,15 @@ public class Pet : MonoBehaviour
         motivated = true;
 
     }
-    private void petMotivatedBonus()
+    public int petMotivatedBonus()
     {
         if (motivated)
         {
-            motivatedBonus = 2;
+            return 2;
         }
-        else if (!motivated)
+        else
         {
-            motivatedBonus = 1;
+            return 1;
         }
     }
 
@@ -63,28 +64,27 @@ public class Pet : MonoBehaviour
         renderer.sharedMaterial = material[petElement];
     }
 
-    private void petElementBonus(int x, int y)
+    public int petElementBonus(int x, int y)
     {
         if (petElement == x)
         {
-            elementalBonus = -1;
+            return -1;
 
         }
         else if (petElement == y)
         {
-            elementalBonus = 1;
+            return 1;
         }
         else
         {
-            elementalBonus = 0;
+            return 0;
         }
     }
 
     public void dexUp()
     {
-        petMotivatedBonus();
-        petElementBonus(3, 4);
-        DEX += ((1 * motivatedBonus) + elementalBonus);
+        DEX += statGain;
+
         motivated = false;
     }
 

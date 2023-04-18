@@ -5,6 +5,7 @@ using UnityEngine;
 public class playerPlatformer : MonoBehaviour
 {
     [SerializeField] private GroundedCheck groundCheck;
+    [SerializeField] private Timer timer;
     [SerializeField] private GameObject winUi;
     [SerializeField] private GameObject mutationButton;
     [SerializeField] private AudioSource audioSource;
@@ -15,7 +16,7 @@ public class playerPlatformer : MonoBehaviour
     private float horizontalInput;
     private Rigidbody rigidBodyComponent;
     private bool isGrounded;
-    private bool reachedEnd;
+    public bool reachedEnd;
     public Transform SpawnPoint;
     Quaternion spawnQuaternion;
 
@@ -77,6 +78,11 @@ public class playerPlatformer : MonoBehaviour
             if (randomNumber <= 20)
             {
                 mutationButton.SetActive(true);
+            }
+            Pet.Instance.statGain = ((1 * Pet.Instance.petMotivatedBonus()) + Pet.Instance.petElementBonus(3, 4));
+            if (timer.gotToEndOnTime())
+            {
+                Pet.Instance.statGain = 1 + Pet.Instance.petElementBonus(3, 4);
             }
             Pet.Instance.dexUp();
             winUi.SetActive(true);

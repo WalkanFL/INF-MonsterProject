@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddf79d3fe5307074695d662f21ad2a80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  renderer: {fileID: 0}
   petType: alien
   BPMutation: none
   petElement: 0
