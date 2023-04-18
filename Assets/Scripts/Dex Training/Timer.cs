@@ -14,6 +14,10 @@ public class Timer : MonoBehaviour
     void Start()
     {
         currentTime = startingTime - Pet.Instance.dex;
+        if (Pet.Instance.dex >= 20)
+        {
+            currentTime = 5;
+        }
     }
     void Update()
     {
