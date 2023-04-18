@@ -36,6 +36,7 @@ public class playerPlatformer : MonoBehaviour
         {
             horizontalInput = Input.GetAxis("Horizontal") * 0;
         }
+
         isGrounded = groundCheck.isObjectGrounded;
 
         if (Input.GetKeyDown(KeyCode.W) && isGrounded)
@@ -80,12 +81,12 @@ public class playerPlatformer : MonoBehaviour
                 mutationButton.SetActive(true);
             }
             Pet.Instance.statGain = ((1 * Pet.Instance.petMotivatedBonus()) + Pet.Instance.petElementBonus(3, 4));
-            if (timer.gotToEndOnTime())
+            if (!timer.gotToEndOnTime())
             {
-                Pet.Instance.statGain = 1 + Pet.Instance.petElementBonus(3, 4);
+                Pet.Instance.statGain /= 2;
             }
-            Pet.Instance.dexUp();
             winUi.SetActive(true);
+            Pet.Instance.dexUp();
         }
     }
 

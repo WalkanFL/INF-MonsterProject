@@ -16,7 +16,7 @@ public class Pet : MonoBehaviour
     public int petElement = 0;
     int elementalBonus;
     public Material[] material;
-    [HideInInspector] public int statGain;
+    public int statGain;
 
 
     [SerializeField] protected int HP, STR, DEX, INT;
