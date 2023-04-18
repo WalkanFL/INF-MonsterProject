@@ -597,7 +597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuObject: {fileID: 981176709}
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 265135764}
 --- !u!1 &265135762
 GameObject:
   m_ObjectHideFlags: 0
