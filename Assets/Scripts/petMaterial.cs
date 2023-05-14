@@ -5,6 +5,7 @@ using UnityEngine;
 public class petMaterial : MonoBehaviour
 {
 
+    //Script to set the correct material for a pet
     private new Renderer renderer = new Renderer();
 
     void Start()

@@ -6,6 +6,7 @@ using TMPro;
 public class showStat : MonoBehaviour
 {
 
+    //Simply, commands used to display the statistics alongside their name
     public void showHP(TMP_Text textAsset)
     {
         textAsset.SetText("HP: " + Pet.Instance.hp);

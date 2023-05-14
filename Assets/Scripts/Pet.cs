@@ -15,10 +15,12 @@ public class Pet : MonoBehaviour
     public string BPMutation;
     public int petElement = 0;
     int elementalBonus;
+    //An array of all possible materials
     public Material[] material;
+    //Value manipulated for the purpose of raising statistics
     public int statGain;
 
-
+    //All the different statictics to use during gameplay
     [SerializeField] protected int HP, STR, DEX, INT;
 
     public int hp => HP;
@@ -26,7 +28,6 @@ public class Pet : MonoBehaviour
     public int dex => DEX;
     public int Int => INT;
 
-    //values to update while storing them between scenes
     public bool motivated;
 
 
