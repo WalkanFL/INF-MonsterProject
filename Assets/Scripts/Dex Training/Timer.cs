@@ -6,13 +6,14 @@ using TMPro;
 public class Timer : MonoBehaviour
 {
 
-    public TextMeshProUGUI timer;
+    public TextMeshProUGUI text;
     public playerPlatformer playerPlatformer;
     public float startingTime;
     private float currentTime;
     public bool finishedInTime;
     void Start()
     {
+        //currentTime = 1; //debug timer
         currentTime = startingTime - Pet.Instance.dex;
         if (Pet.Instance.dex >= 20)
         {
@@ -28,26 +29,16 @@ public class Timer : MonoBehaviour
             if (currentTime <= 0)
             {
                 currentTime = 0;
-                timer.color = Color.red;
+                text.color = Color.red;
+                playerPlatformer.endTraining();
             }
         }
 
     }
 
-    public bool gotToEndOnTime()
-    {
-        if (currentTime > 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
 
     public void setTimerText()
     {
-        timer.text = currentTime.ToString("0.00");
+        text.text = currentTime.ToString("0.00");
     }
 }

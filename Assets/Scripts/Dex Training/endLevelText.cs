@@ -8,15 +8,18 @@ public class endLevelText : MonoBehaviour
     public Timer timer;
     public playerPlatformer player;
     public TextMeshProUGUI text;
-    void Update()
+    void Awake()
     {
-        if (player.reachedEnd && timer.gotToEndOnTime())
+        if (player.reachedEnd)
         {
             text.text = "You did it!";
         }
-        else if (player.reachedEnd && !timer.gotToEndOnTime())
+        else if (timer.text.color == Color.red)
         {
             text.text = "Failure...";
+        }
+        else{
+            text.text = "huh?";
         }
     }
 }

@@ -25,6 +25,24 @@ public class playerPlatformer : MonoBehaviour
         rigidBodyComponent = GetComponent<Rigidbody>();
     }
 
+    public void endTraining(){
+        int randomNumber = Random.Range(1, 100);
+            if (Pet.Instance.motivated)
+            {
+                randomNumber -= 10;
+            }
+            if (randomNumber <= 20)
+            {
+                mutationButton.SetActive(true);
+            }
+            Pet.Instance.statGain = ((1 * Pet.Instance.petMotivatedBonus()) + Pet.Instance.petElementBonus(3, 4));
+            if (timer.text.color == Color.red)
+            {
+                Pet.Instance.statGain /= 2;
+            }
+            winUi.SetActive(true);
+            Pet.Instance.dexUp();
+    }
 
     void Update()
     {
@@ -71,22 +89,7 @@ public class playerPlatformer : MonoBehaviour
         if (other.gameObject.layer == 8)
         {
             reachedEnd = true;
-            int randomNumber = Random.Range(1, 100);
-            if (Pet.Instance.motivated)
-            {
-                randomNumber -= 10;
-            }
-            if (randomNumber <= 20)
-            {
-                mutationButton.SetActive(true);
-            }
-            Pet.Instance.statGain = ((1 * Pet.Instance.petMotivatedBonus()) + Pet.Instance.petElementBonus(3, 4));
-            if (!timer.gotToEndOnTime())
-            {
-                Pet.Instance.statGain /= 2;
-            }
-            winUi.SetActive(true);
-            Pet.Instance.dexUp();
+            endTraining();
         }
     }
 
